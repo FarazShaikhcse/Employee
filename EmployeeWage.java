@@ -7,18 +7,11 @@ public class EmployeeWage{
 		int wageperhour=20;
 		int fulldayhour=0,empwage=0;
 	
-		double attendance=Math.floor(Math.random()*10)%3;
-		if (attendance==IS_FULL_TIME)
-		{
-			fulldayhour=16;
-		}
-		else if(attendance==IS_PART_TIME)
-		{
-			fulldayhour=8;
-		}
-		else
-		{
-			System.out.println("Employee is absent");
+		int attendance=(int)Math.floor(Math.random()*10)%3;
+		switch (attendance) {
+			case  IS_FULL_TIME: fulldayhour=16;break;
+			case IS_PART_TIME: fulldayhour=8;break;
+			default: System.out.println("Employee is absent");
 		}
 		empwage=fulldayhour*wageperhour ;
 				
