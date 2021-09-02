@@ -1,57 +1,60 @@
-public class EmployeeWage{
-		
-		final int IS_FULL_TIME = 1;
-		final int IS_PART_TIME = 2;
-		final int wageperhour = 20;
-		int fulldayhour;
-		int totworkinghours; 
-		int totworkingdays;
-		int empwage;
-		int totalwage;
-		
-		public EmployeeWage() {
-			
-			totworkinghours = 0;
-			totworkingdays = 0;
-			totalwage = 0;
-			
-		}
-		public void empAttendance() {
-			int attendance=(int)Math.floor(Math.random()*10)%3;
-			switch (attendance) {
-				case  IS_FULL_TIME: fulldayhour = 16; 
-									totworkingdays += 1; 
-									break;
-									
-				case IS_PART_TIME: fulldayhour = 8; 
-								   totworkingdays += 1; 
-								   break;
-								   
-				default: fulldayhour=0; 
-						 break;
-			}
-			totworkinghours += fulldayhour;
-		}
-		public void calculateWage() {
-			empwage = fulldayhour * wageperhour ;
-			totalwage += empwage;
-			totworkinghours += fulldayhour;		
-			System.out.println("Employee wage for day is "+empwage);
-		}
-        public static void main(String[] args) {
+import java.util.Scanner;
 
-        System.out.println("Welcome to Employee wage Computation program");
-		
-		EmployeeWage emp = new EmployeeWage();
-		
-		while(emp.totworkinghours<100 || emp.totworkingdays<20)
-		{
-			emp.empAttendance();
-			emp.calculateWage();
-		}
-		
-		
-		System.out.println("Total wage of employee: "+emp.totalwage);
-}
-}
+public class EmployeeWage {
 
+	final int wageperhour;
+	private final String company;
+	int totworkinghours;
+	int totworkingdays;
+	int empwage;
+
+
+	public EmployeeWage(String company, int wageperhour, int workingdays, int workinghours)
+	{
+		this.company = company;
+		this.wageperhour = wageperhour;
+		this.totworkingdays = workingdays;
+		this.totworkinghours = workinghours;
+	
+	}
+
+
+	public void calculateWage() {
+		
+		empwage = totworkinghours * wageperhour;
+		
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println("Welcome to Employee wage Computation program");
+
+		int n;
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the no of companies");
+		n = scanner.nextInt();
+		EmployeeWage empwage[] = new EmployeeWage[n];
+		for(int i=0;i<n;i++) {
+			System.out.println("Enter the company name:");
+			String name = scanner.next();
+			System.out.println("Enter the wage per hour:");
+			int wage = scanner.nextInt();
+			System.out.println("Enter the number of working days:");
+			int days = scanner.nextInt();
+			System.out.println("Enter the number of working hours per month:");
+			int hours = scanner.nextInt();
+			empwage[i] = new EmployeeWage(name,wage,days,hours);
+			empwage[i].calculateWage();
+			
+		}
+		for(int i=0;i<n;i++) {
+			System.out.println("Company details:");
+			System.out.println("Name: "+empwage[i].company);
+			System.out.println("Wage per hour: " +empwage[i].wageperhour);
+			System.out.println("Number of working days: "+empwage[i].totworkingdays);
+			System.out.println("Number of working hours per month: "+empwage[i].totworkinghours);
+			System.out.println("Total wage of employee of the company "+empwage[i].company+ " is "+empwage[i].empwage);
+		}
+
+	}
+}
