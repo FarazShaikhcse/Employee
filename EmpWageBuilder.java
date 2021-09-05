@@ -54,7 +54,8 @@ public class EmpWageBuilder implements EmpWage{
 					empHour = 0;
 				}
 				totalHours += empHour;
-				System.out.println("Day " + totalDays + " Working hours: " + empHour);
+				company.setDailyWage(empHour * company.wageperhour);
+				System.out.println("Day " + totalDays + " Working hours: " + empHour + " Daily wage: " +company.getDailyWage());
 
 			}
 			company.setTotalWage(totalHours * company.wageperhour);
