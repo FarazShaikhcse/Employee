@@ -1,12 +1,13 @@
 import java.util.Scanner;
 
 public class EmployeeWage {
-
-	final int wageperhour;
-	private final String company;
-	int totworkinghours;
-	int totworkingdays;
-	int empwage;
+	public static final int IS_FULL_TIME = 1;
+	public static final int IS_PART_TIME = 2;
+	public final int wageperhour;
+	public final String company;
+	public int totworkinghours;
+	public int totworkingdays;
+	public int totalWage;
 
 
 	public EmployeeWage(String company, int wageperhour, int workingdays, int workinghours)
@@ -21,7 +22,29 @@ public class EmployeeWage {
 
 	public void calculateWage() {
 		
-		empwage = totworkinghours * wageperhour;
+		int empWage, totalHours, totalDays, empHour;
+		empWage = totalHours = totalDays = empHour = 0;
+
+		while (totalHours < totworkinghours && totalDays < totworkingdays) {
+			totalDays += 1;
+			int attendance = (int) Math.floor(Math.random() * 10) % 3;
+
+			switch (attendance) {
+			case IS_FULL_TIME:
+				empHour = 8;
+				break;
+			case IS_PART_TIME:
+				empHour = 4;
+				break;
+			default:
+				empHour = 0;
+			}
+			totalHours += empHour;
+			System.out.println("Day "+totalDays+ " Working hours: "+empHour);
+
+		}
+		empWage = wageperhour * totalHours;
+		totalWage += empWage;
 		
 	}
 
@@ -44,7 +67,7 @@ public class EmployeeWage {
 			System.out.println("Enter the number of working hours per month:");
 			int hours = scanner.nextInt();
 			empwage[i] = new EmployeeWage(name,wage,days,hours);
-			empwage[i].calculateWage();
+			
 			
 		}
 		for(int i=0;i<n;i++) {
@@ -53,7 +76,8 @@ public class EmployeeWage {
 			System.out.println("Wage per hour: " +empwage[i].wageperhour);
 			System.out.println("Number of working days: "+empwage[i].totworkingdays);
 			System.out.println("Number of working hours per month: "+empwage[i].totworkinghours);
-			System.out.println("Total wage of employee of the company "+empwage[i].company+ " is "+empwage[i].empwage);
+			empwage[i].calculateWage();
+			System.out.println("Total wage of employee of the company "+empwage[i].company+ " is "+empwage[i].totalWage);
 		}
 
 	}
