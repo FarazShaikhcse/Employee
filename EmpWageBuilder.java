@@ -62,6 +62,20 @@ public class EmpWageBuilder implements EmpWage{
 			System.out.println(company + "\n");
 		}
 	}
+	/**
+	 * this method returns totalwage of company
+	 */
+	public int getTotalWage(String company) {
+
+		for (CompanyEmpWage cmp : companywage) {
+			if ((cmp.company).equals(company)) {
+				return cmp.getTotalWage();
+			}
+
+		}
+		return 0;
+
+	}
 
 	public static void main(String[] args) {
 
@@ -81,8 +95,12 @@ public class EmpWageBuilder implements EmpWage{
 			System.out.println("Enter the number of working hours per month:");
 			int hours = scanner.nextInt();
 			empWageBuilder.addCompanyEmpWage(name, wage, hours, days);
-			empWageBuilder.calculateWage();
+			
 		}
+		empWageBuilder.calculateWage();
+		System.out.println("Enter the name of company whose total wage is needed");
+		String name = scanner.next();
+		System.out.println("Total employee wage for the company is " + empWageBuilder.getTotalWage(name));
 
 	}
 }
