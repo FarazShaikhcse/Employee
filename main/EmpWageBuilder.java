@@ -1,4 +1,6 @@
 package main;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -9,10 +11,10 @@ public class EmpWageBuilder implements EmpWage{
 
 	private int numOfCompany = 0;
 
-	private CompanyEmpWage[] companywage;
+	private List<CompanyEmpWage> companywage;
 
 	EmpWageBuilder() {
-		companywage = new CompanyEmpWage[5];
+		companywage = new ArrayList<>();
 	}
 
 	/**
@@ -23,7 +25,7 @@ public class EmpWageBuilder implements EmpWage{
 	 * this method creates new company employee wage object when new employee is added
 	 */
 	public void addCompanyEmpWage(String company, int wagePerHour, int maxHoursPerMonth, int maxDaysPerMonth) {
-		companywage[numOfCompany] = new CompanyEmpWage(company, wagePerHour, maxHoursPerMonth, maxDaysPerMonth);
+		companywage.add(new CompanyEmpWage(company, wagePerHour, maxHoursPerMonth, maxDaysPerMonth));
 		numOfCompany += 1;
 		
 	}
@@ -33,11 +35,11 @@ public class EmpWageBuilder implements EmpWage{
 	 */
 	public void calculateWage() {
 
-		for (int i = 0; i < numOfCompany; i++) {
+		for (CompanyEmpWage company: companywage) {
 			int empWage, totalHours, totalDays, empHour;
 			empWage = totalHours = totalDays = empHour = 0;
 
-			while (totalHours < companywage[i].totworkinghours && totalDays < companywage[i].totworkingdays) {
+			while (totalHours < company.totworkinghours && totalDays < company.totworkingdays) {
 				totalDays += 1;
 				int attendance = (int) Math.floor(Math.random() * 10) % 3;
 
@@ -55,8 +57,8 @@ public class EmpWageBuilder implements EmpWage{
 				System.out.println("Day " + totalDays + " Working hours: " + empHour);
 
 			}
-			companywage[i].setTotalWage(totalHours * companywage[i].wageperhour);
-			System.out.println(companywage[i] + "\n");
+			company.setTotalWage(totalHours * company.wageperhour);
+			System.out.println(company + "\n");
 		}
 	}
 
