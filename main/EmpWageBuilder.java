@@ -2,7 +2,7 @@ package main;
 import java.util.Scanner;
 
 
-public class EmpWageBuilder {
+public class EmpWageBuilder implements EmpWage{
 
 	public static final int IS_FULL_TIME = 1;
 	public static final int IS_PART_TIME = 2;
@@ -22,7 +22,7 @@ public class EmpWageBuilder {
 	 * @param maxDaysPerMonth
 	 * this method creates new company employee wage object when new employee is added
 	 */
-	private void addCompanyEmpWage(String company, int wagePerHour, int maxHoursPerMonth, int maxDaysPerMonth) {
+	public void addCompanyEmpWage(String company, int wagePerHour, int maxHoursPerMonth, int maxDaysPerMonth) {
 		companywage[numOfCompany] = new CompanyEmpWage(company, wagePerHour, maxHoursPerMonth, maxDaysPerMonth);
 		numOfCompany += 1;
 		
