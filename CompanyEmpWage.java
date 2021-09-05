@@ -4,6 +4,7 @@ public class CompanyEmpWage {
 	
 	public final int wageperhour;
 	public final String company;
+	public int dailyWage;
 	public int totworkinghours;
 	public int totworkingdays;
 	public int totalWage;
@@ -16,6 +17,14 @@ public class CompanyEmpWage {
 
 	}
 
+	public int getDailyWage() {
+		return dailyWage;
+	}
+	
+	public void setDailyWage(int dailyWage) {
+		this.dailyWage = dailyWage;
+	}
+	
 	public int getTotalWage() {
 		return totalWage;
 	}
